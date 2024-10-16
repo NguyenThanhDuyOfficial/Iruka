@@ -1,0 +1,33 @@
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/workspace.sh")
+
+(defwindow status
+  :monitor 0
+  :geometry (geometry
+    :x "0"
+    :y "0"
+    :width "32px"
+    :height "100%"
+    :anchor "right center")
+  :stacking "fg"
+  :exclusive "true"
+  (main)
+)
+
+(defwidget main []
+  (centerbox :class "mainBox" :orientation "v"
+    (workspace)
+    (workspace)
+    (workspace)
+  )
+)
+
+(defwidget workspace []
+  (box :class "workspaceBox" :orientation "v" :valign "start"
+    (for workspace in workspaces
+      (label 
+        :class "${workspace == 2 ? 'workspaceActive' : ''} ${workspace == 1 ? 'workspaceIdle' : ''} ${workspace == 0 ? 'workspaceDisabled' : ''}" 
+        :text "${workspace == 0 ? '' : ''}"
+      )
+    )
+  )
+)

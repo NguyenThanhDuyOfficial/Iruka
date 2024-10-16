@@ -14,20 +14,54 @@
 )
 
 (defwidget main []
-  (centerbox :class "mainBox" :orientation "v"
+  (centerbox :orientation "v"
     (workspace)
-    (workspace)
-    (workspace)
+    (time)
+    (bottom)
   )
 )
 
 (defwidget workspace []
-  (box :class "workspaceBox" :orientation "v" :valign "start"
+  (box :class "workspaceBox" :orientation "v" :valign "start" :spacing 2
     (for workspace in workspaces
       (label 
         :class "${workspace == 2 ? 'workspaceActive' : ''} ${workspace == 1 ? 'workspaceIdle' : ''} ${workspace == 0 ? 'workspaceDisabled' : ''}" 
-        :text "${workspace == 0 ? '' : ''}"
+        :text  ''
       )
     )
+  )
+)
+
+(defwidget time []
+  (box :class "timeBox" :orientation "v" :valign "center"
+    (label :class "time" :text {formattime(EWW_TIME, '%H')})
+    (label :class "dots" :text " ")
+    (label :class "time" :text {formattime(EWW_TIME, '%M')})
+  )
+)
+
+(defvar systemExpanded false)
+(defwidget system []
+  (eventbox :class "systemBox" :onhover "${EWW_CMD} update systemExpanded=true" :onhoverlost "${EWW_CMD} update systemExpanded=false"
+    (box :orientation "v" :space-evenly "false"
+      (revealer :transition "slideup" :reveal systemExpanded :duration "600ms"
+        (box :orientation "v"
+          (button :class "batteryBtn" :width 8 :height 8 "󰂄")
+          (button :class "netBtn" :width 8 :height 8 "󰖩")
+          (button :class "bluetoothBtn" :width 8 :height 8 "󰂱")
+          (button :class "volumeBtn" :width 8 :height 8 "󰕾")
+          (button :class "brightBtn" :width 8 :height 8 "󰛨")
+        )
+      )
+      (button :class "settingBtn" :width 8 :height 8 "")
+    )
+  )
+)
+(defwidget bottom []
+  (box :class "bottomBox" :orientation "v" :valign "end" :space-evenly false
+    (button :class "todoBtn" :width 1 :height 1 "")
+    (button :class "weatherBtn" :width 8 :height 8 "󰖐")
+    (system)
+    (button :class "dashboardBtn" :width 8 :height 8 "󰣇")
   )
 )

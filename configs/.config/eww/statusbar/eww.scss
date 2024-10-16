@@ -1,1 +1,92 @@
+%boxStyle {
+  padding: 8px 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background-color: $base;
+}
+
+
+.workspaceBox {
+  @extend %boxStyle;
+  margin-top: 32px;
+
+  * {
+    padding-right: 6px;
+  }
+  .workspaceActive {
+    color: $text;
+  }
+  .workspaceIdle {
+    color: $overlay0;
+  }
+  .workspaceDisabled {
+    color: $surface0;
+  }
+}
+
+
+.timeBox {
+  @extend %boxStyle;
+
+  .dots {
+    padding-right: 1px;
+    font-size: 8px;
+  }
+  .time{
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
+
+.bottomBox {
+  @extend %boxStyle;
+  margin-bottom: 32px;
+
+  button {
+    margin: 4px;
+    box-shadow: none;
+    border: none;
+    padding:0;
+  }
+  button:hover {
+    background-color: $surface0;
+  }
+
+  .todoBtn, .weatherBtn, .netBtn, .brightBtn {
+    label {
+      padding-right: 5px;
+    }
+  }
+
+  .batteryBtn {
+    label {
+      padding-right: 1px;
+    }
+  }
+
+  .bluetoothBtn, .volumeBtn {
+    label {
+      padding-right: 2px;
+    }
+  }
+
+  .settingBtn, .dashboardBtn {
+    label {
+      padding-right: 3px;
+    }
+  }
+
+  .systemBox {
+    @extend %boxStyle;
+
+    button:hover {
+      background-color: $surface1;
+    }
+  }
+  .systemBox:hover{
+    background-color: $surface0;
+  }
+}
+
 

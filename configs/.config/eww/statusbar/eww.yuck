@@ -1,4 +1,3 @@
-(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/workspace.sh")
 
 (defwindow status
   :monitor 0
@@ -21,6 +20,7 @@
   )
 )
 
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/workspace.sh")
 (defwidget workspace []
   (box :class "workspaceBox" :orientation "v" :valign "start" :spacing 2
     (for workspace in workspaces
@@ -40,13 +40,14 @@
   )
 )
 
+(deflisten battery :initial "[]" "bash ~/.config/eww/scripts/battery.sh")
 (defvar systemExpanded false)
 (defwidget system []
   (eventbox :class "systemBox" :onhover "${EWW_CMD} update systemExpanded=true" :onhoverlost "${EWW_CMD} update systemExpanded=false"
     (box :orientation "v" :space-evenly "false"
       (revealer :transition "slideup" :reveal systemExpanded :duration "600ms"
         (box :orientation "v"
-          (button :class "batteryBtn" :width 8 :height 8 "󰂄")
+          (button :class "${battery.class}" :width 8 :height 8 "${battery.icon}")
           (button :class "netBtn" :width 8 :height 8 "󰖩")
           (button :class "bluetoothBtn" :width 8 :height 8 "󰂱")
           (button :class "volumeBtn" :width 8 :height 8 "󰕾")

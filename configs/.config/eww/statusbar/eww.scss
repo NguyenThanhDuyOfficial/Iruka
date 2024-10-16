@@ -54,27 +54,23 @@
   }
 
   .todoBtn, .weatherBtn, .netBtn, .brightBtn {
-    label {
-      padding-right: 5px;
-    }
+    padding-right: 5px;
   }
 
   .batteryBtn {
-    label {
-      padding-right: 1px;
-    }
+    padding-right: 1px;
   }
 
   .bluetoothBtn, .volumeBtn {
-    label {
-      padding-right: 2px;
-    }
+    padding-right: 2px;
   }
 
   .settingBtn, .dashboardBtn {
-    label {
-      padding-right: 3px;
-    }
+    padding-right: 3px;
+  }
+
+  .veryLowCharging, .lowCharging, .normalCharging, .highCharging {
+    padding-right: 4px;
   }
 
   .systemBox {

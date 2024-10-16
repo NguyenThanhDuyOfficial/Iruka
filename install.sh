@@ -7,7 +7,7 @@ makepkg -si
 rm -rf yay
 
 # Install packages.
-yay -S pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse hyprland-git ttf-cascadia-code-nerd stow sudo alacritty fish starship neovim wl-clipboard rofi-wayland qutebrowser
+yay -S pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse hyprland-git ttf-cascadia-code-nerd stow sudo alacritty fish starship neovim wl-clipboard rofi-wayland qutebrowser jq socat
 
 stow -R configs
 

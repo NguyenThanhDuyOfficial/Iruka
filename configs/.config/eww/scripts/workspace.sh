@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Print a JSON array with 6 indices
 # 0-4th index representing the status for workspace IDs 1 through 5

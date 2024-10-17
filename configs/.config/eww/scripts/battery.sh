@@ -36,6 +36,7 @@ old=$(getBattery)
 echo $old
 
 while true; do
+  sleep 60
 
   new=$(getBattery)
   if [[ "$old" != "$new" ]]; then
@@ -43,5 +44,4 @@ while true; do
     echo $old
   fi
 
-  sleep 60
 done

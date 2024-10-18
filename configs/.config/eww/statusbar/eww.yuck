@@ -1,4 +1,3 @@
-
 (defwindow status
   :monitor 0
   :geometry (geometry
@@ -40,29 +39,40 @@
   )
 )
 
-(deflisten battery :initial "[]" "bash ~/.config/eww/scripts/battery.sh")
-(defvar systemExpanded false)
+
+(defvar systemExpand false)
+(deflisten battery :initial "" "bash ~/.config/eww/scripts/battery.sh")
+(deflisten network :initial "" "bash ~/.config/eww/scripts/network.sh")
+(deflisten bluetooth :initial "" "bash ~/.config/eww/scripts/bluetooth.sh")
+(defvar volume "")
+(defvar backlight "")
+<D-g>
+
 (defwidget system []
-  (eventbox :class "systemBox" :onhover "${EWW_CMD} update systemExpanded=true" :onhoverlost "${EWW_CMD} update systemExpanded=false"
+  (eventbox :class "systemBox" :onhover "${EWW_CMD} update systemExpand=true" :onhoverlost "${EWW_CMD} update systemExpand=false"
     (box :orientation "v" :space-evenly "false"
-      (revealer :transition "slideup" :reveal systemExpanded :duration "600ms"
+      (revealer :transition "slideup" :reveal systemExpand :duration "600ms"
         (box :orientation "v"
-          (button :class "${battery.class}" :width 8 :height 8 "${battery.icon}")
-          (button :class "netBtn" :width 8 :height 8 "󰖩")
-          (button :class "bluetoothBtn" :width 8 :height 8 "󰂱")
-          (button :class "volumeBtn" :width 8 :height 8 "󰕾")
-          (button :class "brightBtn" :width 8 :height 8 "󰛨")
+          (button :class "${battery.class}" "${battery.icon}")
+          (button :class "${network.class}" "${network.icon}")
+          (button :class "${bluetooth.class}" "${bluetooth.icon}")
+          (button :class "${volume.class}" "${volume.icon}")
+          (button :class "${backlight.class}" "${backlight.icon}")
         )
       )
-      (button :class "settingBtn" :width 8 :height 8 "")
+      (button :visible "${battery.class == 'veryLow' && !systemExpand}" :class "${battery.class}" "${battery.icon}")
+      (button :visible "${network.class == 'netDisconnect' && !systemExpand}" :class "${network.class}" "${network.icon}")
+      (button :visible "${bluetooth.class == 'bluetooth' && !systemExpand}" :class "${bluetooth.class}" "${bluetooth.icon}")
+      (button :visible "${volume.class == 'mute' && !systemExpand}" :class "${volume.class}" "${volume.icon}")
+      (button :class "settingBtn" "")
     )
   )
 )
 (defwidget bottom []
   (box :class "bottomBox" :orientation "v" :valign "end" :space-evenly false
-    (button :class "todoBtn" :width 1 :height 1 "")
-    (button :class "weatherBtn" :width 8 :height 8 "󰖐")
+    (button :class "todoBtn" "")
+    (button :class "weatherBtn" "󰖐")
     (system)
-    (button :class "dashboardBtn" :width 8 :height 8 "󰣇")
+    (button :class "dashboardBtn" "󰣇")
   )
 )

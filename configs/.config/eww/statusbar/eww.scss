@@ -53,23 +53,23 @@
     background-color: $surface0;
   }
 
-  .todoBtn, .weatherBtn, .netBtn, .brightBtn {
+  .todoBtn, .weatherBtn, .netBtn, .brightBtn, .netDisconnect {
     padding-right: 5px;
   }
 
-  .batteryBtn {
+  .batteryBtn, .blueDisconnect {
     padding-right: 1px;
   }
 
-  .bluetoothBtn, .volumeBtn {
+  .bluetoothBtn, .volumeBtn, .bluetooth, .volumeMute, .volumeHigh {
     padding-right: 2px;
   }
 
-  .settingBtn, .dashboardBtn {
+  .settingBtn, .dashboardBtn, .ethernet {
     padding-right: 3px;
   }
 
-  .veryLowCharging, .lowCharging, .normalCharging, .highCharging {
+  .veryLowCharging, .lowCharging, .normalCharging, .highCharging, .wifi {
     padding-right: 4px;
   }
 
@@ -84,5 +84,3 @@
     background-color: $surface0;
   }
 }
-
-

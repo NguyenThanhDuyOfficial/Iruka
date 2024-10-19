@@ -1,0 +1,77 @@
+(defwindow status
+  :monitor 0
+  :geometry (geometry
+    :x "0"
+    :y "0"
+    :width "32px"
+    :height "100%"
+    :anchor "right center")
+  :stacking "fg"
+  :exclusive "true"
+  (main)
+)
+
+(defwidget main []
+  (centerbox :orientation "v"
+    (workspace)
+    (time)
+    (bottom)
+  )
+)
+
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/workspace.sh")
+(defwidget workspace []
+  (box :class "workspaceBox" :orientation "v" :valign "start" :spacing 2
+    (for workspace in workspaces
+      (label 
+        :class "${workspace == 2 ? 'workspaceActive' : ''} ${workspace == 1 ? 'workspaceIdle' : ''} ${workspace == 0 ? 'workspaceDisabled' : ''}" 
+        :text  ''
+      )
+    )
+  )
+)
+
+(defwidget time []
+  (box :class "timeBox" :orientation "v" :valign "center"
+    (label :class "time" :text {formattime(EWW_TIME, '%H')})
+    (label :class "dots" :text " ")
+    (label :class "time" :text {formattime(EWW_TIME, '%M')})
+  )
+)
+
+
+(defvar systemExpand false)
+(deflisten battery :initial "" "bash ~/.config/eww/scripts/battery.sh")
+(deflisten network :initial "" "bash ~/.config/eww/scripts/network.sh")
+(deflisten bluetooth :initial "" "bash ~/.config/eww/scripts/bluetooth.sh")
+(defvar volume "")
+(defvar backlight "")
+
+(defwidget system []
+  (eventbox :class "systemBox" :onhover "${EWW_CMD} update systemExpand=true" :onhoverlost "${EWW_CMD} update systemExpand=false"
+    (box :orientation "v" :space-evenly "false"
+      (revealer :transition "slideup" :reveal systemExpand :duration "600ms"
+        (box :orientation "v"
+          (button :class "${battery.class}" "${battery.icon}")
+          (button :class "${network.class}" "${network.icon}")
+          (button :class "${bluetooth.class}" "${bluetooth.icon}")
+          (button :class "${volume.class}" "${volume.icon}")
+          (button :class "${backlight.class}" "${backlight.icon}")
+        )
+      )
+      (button :visible "${battery.class == 'veryLow' && !systemExpand}" :class "${battery.class}" "${battery.icon}")
+      (button :visible "${network.class == 'netDisconnect' && !systemExpand}" :class "${network.class}" "${network.icon}")
+      (button :visible "${bluetooth.class == 'bluetooth' && !systemExpand}" :class "${bluetooth.class}" "${bluetooth.icon}")
+      (button :visible "${volume.class == 'mute' && !systemExpand}" :class "${volume.class}" "${volume.icon}")
+      (button :class "settingBtn" "")
+    )
+  )
+)
+(defwidget bottom []
+  (box :class "bottomBox" :orientation "v" :valign "end" :space-evenly false
+    (button :class "todoBtn" "")
+    (button :class "weatherBtn" "󰖐")
+    (system)
+    (button :class "dashboardBtn" "󰣇")
+  )
+)

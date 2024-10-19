@@ -1,0 +1,10 @@
+@import "../../../../.config/theme/eww.scss"
+
+* {
+  font-family: "CaskaydiaCove Nerd Font";
+  font-size: 16px;
+  color: $text;
+  background: transparent;
+}
+
+@import "./statusbar/eww.scss"

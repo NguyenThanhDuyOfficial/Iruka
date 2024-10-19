@@ -46,7 +46,6 @@
 (deflisten bluetooth :initial "" "bash ~/.config/eww/scripts/bluetooth.sh")
 (defvar volume "")
 (defvar backlight "")
-<D-g>
 
 (defwidget system []
   (eventbox :class "systemBox" :onhover "${EWW_CMD} update systemExpand=true" :onhoverlost "${EWW_CMD} update systemExpand=false"
